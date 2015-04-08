@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from .models import Question
 from .serializers import QuestionSerializer, UserSerializer
 from .forms import QuestionForm
@@ -14,6 +15,13 @@ from .permissions import IsOwnerOrReadOnly
 def home(request):
     tmpl_vars = {'form':QuestionForm()}
     return render(request, 'index.html', tmpl_vars)
+
+@api_view(('GET',))
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'questions':reverse('question-collection', request=request, format=format)
+    })
 
 #########################
 ### class based views ###

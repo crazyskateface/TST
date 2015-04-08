@@ -107,3 +107,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/ubuntu/web/TST/static/'
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
+
+
+
+
